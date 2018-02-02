@@ -12,6 +12,20 @@ class UserModel extends AbstractModel
   FROM `user`
   WHERE `id`=?";
 
+  const SQL_GET_LAST_USERS = "SELECT U.`id`, U.`firstName`, U.`lastName`, U.`avatarUrl`,U.`phone`,U.`mail`, U.`rights`, COUNT(P.`redactorId`) AS `postNumber`, COUNT(C.`userId`) AS `commentNumber`
+                              FROM `user` as U
+                              LEFT JOIN `post` AS P ON P.`redactorId`=U.`id`
+                              LEFT JOIN `comment` AS C ON C.`userId`=U.`id`
+                              GROUP BY U.`id`
+                              ORDER BY U.`id` DESC LIMIT 8";
+
+  const SQL_GET_ALL_USERS = "SELECT U.`id`, U.`firstName`, U.`lastName`, U.`avatarUrl`,U.`phone`,U.`mail`,U.`rights`, COUNT(P.`redactorId`) AS `postNumber`, COUNT(C.`userId`) AS `commentNumber`
+                              FROM `user` as U
+                              LEFT JOIN `post` AS P ON P.`redactorId`=U.`id`
+                              LEFT JOIN `comment` AS C ON C.`userId`=U.`id`
+                              GROUP BY U.`id`
+                              ORDER BY U.`id` DESC";
+
   const SQL_AVATAR_UPDATE =
   "UPDATE `user`
   SET `avatarUrl`=?
@@ -27,6 +41,8 @@ class UserModel extends AbstractModel
   const SQL_UPDATE_PASSWORD =
   "UPDATE `password` SET `password`=? WHERE `userId`=?";
 
+  const SQL_UPDATE_RIGHTS = "UPDATE `user` SET `rights`=? WHERE `id`=?";
+
 /**
  * Méthode permettant de lancer une session. Opère la vérification des identifiants de connexion (mail et password) et opère un session_start si la requête SQL retourne un résultat. Lance également le remplissage du $_SESSION.
  * @param  array  $queryFields [champs mail et password servant de référence pour la vérification des identifiants]
@@ -38,8 +54,16 @@ class UserModel extends AbstractModel
     $result = $this->database->queryOne(self::SQL_CONNECT,$queryFields);
     if ($result)
     {
-      $session= (new UserSession)->create($result);
-      $http->redirectTo('profil');
+      if ($result['rights'] != 'banned')
+      {
+        $session= (new UserSession)->create($result);
+        $http->redirectTo('profil');
+      }
+      else
+      {
+        $flashbag = (new FlashBag)->add("Vous n'avez pas la persmission de vous connecter actuellement. Veuillez réessayer ultérieurement");
+        $http->redirectTo('');
+      }
     }
     else
     {
@@ -47,6 +71,18 @@ class UserModel extends AbstractModel
       $http->redirectTo('');
     }
 
+  }
+
+  public function getLastUser()
+  {
+    $result = $this->database->query(self::SQL_GET_LAST_USERS);
+    return($result);
+  }
+
+  public function getAllUser()
+  {
+    $result = $this->database->query(self::SQL_GET_ALL_USERS);
+    return($result);
   }
 
   /**
@@ -145,7 +181,12 @@ public function updatePassword(array $queryFields)
     $result = $this->database->executeSql(self::SQL_UPDATE_PASSWORD,[$queryFields['password'],$queryFields['id']]);
   }
   return $result;
+}
 
+public function updateRights(array $queryFields)
+{
+  $result = $this->database->executeSql(self::SQL_UPDATE_RIGHTS,$queryFields);
+  return($result);
 }
 }
 

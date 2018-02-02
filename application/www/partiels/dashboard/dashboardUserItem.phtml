@@ -1,0 +1,32 @@
+<tr>
+  <td> <?= $value['id'] ?> </td>
+  <td> <?= $value['firstName'] ?> </td>
+  <td> <?= $value['lastName'] ?> </td>
+  <td> <?= $value['phone'] ?> </td>
+  <td> <?= $value['mail'] ?> </td>
+  <td> <?= $value['postNumber'] ?> </td>
+  <td> <?= $value['commentNumber'] ?> </td>
+  <td>
+    <form action="<?= $requestUrl ?>/dashboard" method="POST">
+      <input type="hidden" name="target" value="<?= $target ?>">
+      <input type="hidden" name="mode" value="updateRights" />
+      <input type="hidden" name="id" value="<?= $value['id'] ?>">
+    <select name="rights">
+      <option <?php if ($value['rights']=='banned'){echo('selected');} ?>>
+        banned
+      </option>
+      <option <?php if ($value['rights']=='user'){echo('selected');} ?>>
+        user
+      </option>
+      <option <?php if ($value['rights']=='moderator'){echo('selected');} ?>>
+        moderator
+      </option>
+      <option <?php if ($value['rights']=='administrator'){echo('selected');} ?>>
+        administrator
+      </option>
+    </select>
+    <button type="submit"><i class="fas fa-edit"></i></button>
+  </form>
+  </td>
+  <td></td>
+</tr>

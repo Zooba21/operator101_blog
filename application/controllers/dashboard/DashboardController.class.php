@@ -21,6 +21,7 @@ class DashboardController
         $render['reportedComments'] = (new CommentModel(new Database))->getLastReportedComments();
         $render['posts'] = (new PostsModel(new Database))->getLastPost();
         $render['categories'] = (new CategoryModel(new Database))->getLastCategoriesDetails();
+        $render['userList'] = (new UserModel(new Database))->getLastUser();
       }
     }
     else
@@ -42,7 +43,7 @@ class DashboardController
     }
     else if($queryFields['mode']=='update')
     {
-      $category = (new CategoryModel(new Database))->updateCategory([$queryFields['categoryId']]);
+      $category = (new CategoryModel(new Database))->updateCategory([$queryFields['categoryName'],$queryFields['id']]);
       $flashbag = (new FlashBag)->add('Votre catégorie a bien été modifiée');
       $http->redirectTo($queryFields['target']);
     }
@@ -51,6 +52,16 @@ class DashboardController
       $category = (new CategoryModel(new Database))->deleteCategory([$queryFields['id']]);
       $flashbag = (new FlashBag)->add('Votre catégorie a bien été supprimée');
       $http->redirectTo($queryFields['target']);
+    }
+    else if($queryFields['mode']=="updateRights")
+    {
+      $user = (new UserModel(new Database))->updateRights([$queryFields['rights'],$queryFields['id']]);
+      $flashbag = (new FlashBag)->add('Les privilèges ont bien été modifiés');
+      $http->redirectTo($queryFields['target']);
+    }
+    else
+    {
+      $http->redirectTO('dashboard');
     }
 
 

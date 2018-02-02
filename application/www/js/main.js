@@ -9,6 +9,7 @@ $(function(){
   $('#commentListTable').tablesorter();
   $('#postReviewTable').tablesorter();
   $('#categoriesReviewTable').tablesorter();
+  $('#userReviewTable').tablesorter();
 });
 
 

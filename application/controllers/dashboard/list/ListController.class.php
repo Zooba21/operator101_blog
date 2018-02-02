@@ -39,6 +39,15 @@ class ListController
             $render['target'] = 'dashboard/list?list=categories';
             $render['categories']= (new CategoryModel(new Database))->getCategoriesDetails();
           }
+          else if ($queryFields['list'] == 'user')
+          {
+            $render['target'] = 'dashboard/list?list=user';
+            $render['userList'] = (new UserModel(new Database))->getAllUser();
+          }
+        }
+        else if (isset($queryFields['categoryId']))
+        {
+            $render['posts'] = (new PostsModel(new Database))->getCategoryPost([$queryFields['categoryId']]);
         }
         else
         {

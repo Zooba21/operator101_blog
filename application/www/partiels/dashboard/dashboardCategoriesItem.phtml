@@ -2,13 +2,26 @@
   <td><?= $value['id'] ?></td>
   <td><?= $value['categoryName'] ?></td>
   <td><?= $value['postNumber'] ?></td>
-  <td><a href="<?= $requestUrl ?>/dashboard/postlist?categoryId=<?= $value['id']?>">Consulter la liste des articles</a></td>
+  <td><a href="<?= $requestUrl ?>/dashboard/list?categoryId=<?= $value['id']?>">Consulter la liste des articles</a></td>
   <td>
-    <form action="<?= $requestUrl ?>/dashboard" method="POST">
+    <form action="<?=$requestUrl ?>/dashboard" method="POST">
+      <input type="text" name="categoryName"></input>
       <input type="hidden" name="id" value="<?= $value['id'] ?>">
-      <input type="hidden" name="mode" value="delete" / >
+      <input type="hidden" name="mode" value="update" / >
       <input type="hidden" name="target" value="<?= $target ?>">
-      <button type="submit"><i class="fas fa-trash-alt"></i></button>
+      <button type="submit"><i class="fas fa-edit"></i></button>
     </form>
+    <?php
+      if ($value['postNumber'] == 0)
+      {
+          echo("<form action='<?= $requestUrl ?>/dashboard' method='POST'>
+                <input type='hidden' name='id' value='".$value['id']."'>
+                <input type='hidden' name='mode' value='delete' / >
+                <input type='hidden' name='target' value='".$target."'>
+                <button type='submit'><i class='fas fa-trash-alt'></i></button>
+              </form>");
+      }
+    ?>
+
   </td>
 </tr>

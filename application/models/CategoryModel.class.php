@@ -20,7 +20,7 @@
 
     const INSERT_CATEGORY = "INSERT INTO `categories` (`categoryName`) VALUES (?)";
 
-    const UPDATE_CATEGORY = "UPDATE `categories` SET (`categoryName`=?) WHERE `id`=?";
+    const UPDATE_CATEGORY = "UPDATE `categories` SET `categoryName`=? WHERE `id`=?";
 
     const DELETE_CATEGORY = "DELETE FROM `categories` WHERE `id`=?";
 

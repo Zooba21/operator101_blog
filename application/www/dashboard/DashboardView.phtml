@@ -5,7 +5,6 @@
     <div class="box-header with-border">
       <h3 class="box-title">Derniers commentaires</h3>
     </div>
-    <!-- /.box-header -->
     <div class="box-body">
       <div class="table-responsive">
         <?php
@@ -115,12 +114,43 @@
   <!-- /.col -->
 </section>
 
+<div class="col col-sm12">
+  <div class="box-header with-border">
+    <h3 class="box-title">Derniers utilisateurs enregistrés</h3>
+  </div>
+  <!-- /.box-header -->
+    <div class="box-body">
+      <div class="table-responsive">
+        <?php
+        if (!empty($userList))
+        {
+          include(__DIR__."/../partiels/dashboard/dashboardUserThead.phtml");
+          foreach($userList as $key=>$value)
+          {
+            include(__DIR__."/../partiels/dashboard/dashboardUserItem.phtml");
+          }
+          echo('</tbody></table>');
+        }
+        else
+        {
+          echo("<p>Aucun commentaire pour le moment</p>");
+        }
+        ?>
+      </div>
+    </div>
+
+    <div class="box-footer clearfix">
+      <a href="<?= $requestUrl ?>/dashboard/list?list=user" class="btn btn-sm btn-default btn-flat pull-right">Voir tous les utilisateurs</a>
+    </div>
+</div>
+
+</section>
+
 <section class="content">
   <div class="col col-sm12">
     <div class="box-header with-border">
       <h3 class="box-title">Gestion des catégories</h3>
     </div>
-  </div>
 
   <div class="box-body">
     <div class="table-reponsive">

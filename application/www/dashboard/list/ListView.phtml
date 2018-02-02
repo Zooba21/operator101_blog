@@ -2,7 +2,7 @@
 
 if(isset($posts) && !empty($posts))
 {
-  include(__DIR__."/../../partiels/dashboard/postlist/dashboardPostsThead.phtml");
+  include(__DIR__."/../../partiels/dashboard/dashboardPostsThead.phtml");
   foreach($posts as $key=>$value)
   {
     include(__DIR__."/../../partiels/dashboard/dashboardPostsItem.phtml");
@@ -28,6 +28,16 @@ else if(isset($categories) && !empty($categories))
   include(__DIR__."/../../partiels/dashboard/dashboardAddCategory.phtml");
   echo("</tbody></table>");
 }
+else if (isset($userList) && !empty($userList))
+{
+  include(__DIR__."/../../partiels/dashboard/dashboardUserThead.phtml");
+  foreach($userList as $key=>$value)
+  {
+    include(__DIR__."/../../partiels/dashboard/dashboardUserItem.phtml");
+  }
+  echo('</tbody></table>');
+}
+
  ?>
 
 
