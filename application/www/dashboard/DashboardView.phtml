@@ -1,0 +1,145 @@
+<section class="content">
+
+          <!-- TABLE: LATEST COMMENTS -->
+  <div class="col col-sm12">
+    <div class="box-header with-border">
+      <h3 class="box-title">Derniers commentaires</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+      <div class="table-responsive">
+        <?php
+        if (!empty($comments))
+        {
+          include(__DIR__."/../partiels/dashboard/dashboardCommentsThead.phtml");
+          foreach($comments as $key=>$value)
+          {
+            include(__DIR__."/../partiels/dashboard/dashboardCommentsItem.phtml");
+          }
+          foreach($comments as $key=>$value)
+          {
+            include(__DIR__."/../partiels/dashboard/dashboardCommentsDetail.phtml");
+          }
+          echo('</tbody></table>');
+        }
+        else
+        {
+          echo("<p>Aucun commentaire pour le moment</p>");
+        }
+        ?>
+      </div>
+    </div>
+
+    <div class="box-footer clearfix">
+      <a href="<?= $requestUrl ?>/dashboard/list?list=comments" class="btn btn-sm btn-default btn-flat pull-right">Voir tous les postes</a>
+    </div>
+
+  </div>
+
+</section>
+
+          <!-- TABLE: LATEST REPORTED COMMENTS -->
+<section class="content">
+
+  <div class="col col-sm12">
+    <div class="box-header with-border">
+      <h3 class="box-title">Derniers commentaires signalés</h3>
+    </div>
+    <!-- /.box-header -->
+      <div class="box-body">
+        <div class="table-responsive">
+          <?php
+          if (!empty($reportedComments))
+          {
+            include(__DIR__."/../partiels/dashboard/dashboardCommentsThead.phtml");
+            foreach($reportedComments as $key=>$value)
+            {
+              include(__DIR__."/../partiels/dashboard/dashboardCommentsItem.phtml");
+            }
+            foreach($reportedComments as $key=>$value)
+            {
+              include(__DIR__."/../partiels/dashboard/dashboardReportedComments.phtml");
+            }
+            echo('</tbody></table>');
+          }
+          else
+          {
+            echo("<p>Aucun commentaire pour le moment</p>");
+          }
+
+
+          ?>
+        </div>
+      </div>
+
+      <div class="box-footer clearfix">
+        <a href="<?= $requestUrl ?>/dashboard/list?list=reportedComments" class="btn btn-sm btn-default btn-flat pull-right">Voir les commentaires signalés</a>
+      </div>
+  </div>
+
+</section>
+
+            <!-- TABLE: LATEST POSTS -->
+<section class="content">
+  <div class="col col-sm12">
+    <div class="box-header with-border">
+      <h3 class="box-title">Derniers posts</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+      <div class="table-responsive">
+        <?php
+        if (!empty($posts))
+        {
+          include(__DIR__."/../partiels/dashboard/dashboardPostsThead.phtml");
+          foreach($posts as $key=>$value)
+          {
+            include(__DIR__."/../partiels/dashboard/dashboardPostsItem.phtml");
+          }
+          echo('</tbody></table>');
+        }
+        else
+        {
+          echo("<p>Aucun post pour le moment</p>");
+        }
+        ?>
+      </div>
+      <!-- /.table-responsive -->
+    </div>
+  </div>
+    <!-- /.box-body -->
+    <div class="box-footer clearfix">
+      <a href="<?= $requestUrl ?>/dashboard/list?list=posts" class="btn btn-sm btn-default btn-flat pull-right">Voir tous les postes</a>
+    </div>
+    <!-- /.box-footer -->
+  <!-- /.col -->
+</section>
+
+<section class="content">
+  <div class="col col-sm12">
+    <div class="box-header with-border">
+      <h3 class="box-title">Gestion des catégories</h3>
+    </div>
+  </div>
+
+  <div class="box-body">
+    <div class="table-reponsive">
+      <?php
+      if (!empty($categories))
+      {
+        include(__DIR__."/../partiels/dashboard/dashboardCategoriesThead.phtml");
+        foreach($categories as $key=>$value)
+        {
+          include(__DIR__."/../partiels/dashboard/dashboardCategoriesItem.phtml");
+        }
+          include(__DIR__."/../partiels/dashboard/dashboardAddCategory.phtml");
+        echo('</tbody></table>');
+      }
+      ?>
+    </div>
+  </div>
+
+  <div class="box-footer clearfix">
+    <a href="<?= $requestUrl ?>/dashboard/list?list=categories" class="btn btn-sm btn-default btn-flat pull-right">Voir toutes les catégories</a>
+  </div>
+</section>

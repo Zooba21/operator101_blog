@@ -1,0 +1,50 @@
+
+<form class="search-post-form" action="">
+  <div class="form-group">
+    <div class="col-sm-12">
+        <input name="postTitle" class="form-control" type="text" placeholder="Rechercher un article"/>
+    </div>
+  </div>
+  <div class="form-group">
+      <div class="col-sm-12">
+        <button class="form-control">Submit</button>
+      </div>
+  </div>
+
+</form>
+
+<?php
+
+
+  if (isset($posts))
+  {
+    if(count($posts) > 1)
+    {
+      ?>
+      <section class="post-list">
+
+      <?php
+      foreach($posts as $key=>$value)
+      {
+        include (__DIR__."/../partiels/posts/postthumbnail.phtml");
+      }
+
+      ?>
+      </section>
+    <?php
+    }
+    else
+    {
+      foreach($posts as $key=>$value)
+      {
+        include (__DIR__."/../partiels/posts/postdetail.phtml");
+      }
+    }
+    if (!empty($_GET))
+    {
+      include (__DIR__."/../partiels/posts/postreturn.phtml");
+    }
+  }
+
+
+ ?>

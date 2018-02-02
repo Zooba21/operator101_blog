@@ -1,0 +1,34 @@
+<?php
+
+if(isset($posts) && !empty($posts))
+{
+  include(__DIR__."/../../partiels/dashboard/postlist/dashboardPostsThead.phtml");
+  foreach($posts as $key=>$value)
+  {
+    include(__DIR__."/../../partiels/dashboard/dashboardPostsItem.phtml");
+  }
+  echo("</tbody></table>");
+}
+else if((isset($comments) || isset($reportedComments)) && !empty($comments))
+{
+  include(__DIR__."/../../partiels/dashboard/dashboardCommentsThead.phtml");
+  foreach($comments as $key=>$value)
+  {
+    include(__DIR__."/../../partiels/dashboard/dashboardCommentsItem.phtml");
+  }
+  echo("</tbody></table>");
+}
+else if(isset($categories) && !empty($categories))
+{
+  include(__DIR__."/../../partiels/dashboard/dashboardCategoriesThead.phtml");
+  foreach($categories as $key=>$value)
+  {
+    include(__DIR__."/../../partiels/dashboard/dashboardCategoriesItem.phtml");
+  }
+  include(__DIR__."/../../partiels/dashboard/dashboardAddCategory.phtml");
+  echo("</tbody></table>");
+}
+ ?>
+
+
+ <a href="<?=$requestUrl?>/dashboard">Retour</a>

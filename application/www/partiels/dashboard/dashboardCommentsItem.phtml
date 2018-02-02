@@ -1,0 +1,12 @@
+<tr>
+  <td><?= $value['userId'] ?></td>
+  <td><?= $value['lastName'] ?></td>
+  <td><?= $value['firstName'] ?></td>
+  <td><a href="<?= $requestUrl ?>/posts?id=<?=$value['postId']?>"><?= $value['postTitle'] ?></a></td>
+  <td><?= $value['commentDate']?></td>
+  <td>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#commentNumber<?=$value['id']?>">
+      Consulter le commentaire
+    </button>
+  </td>
+</tr>

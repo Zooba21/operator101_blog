@@ -1,0 +1,26 @@
+<nav class="navbar-header navbar navbar-toggleable-md navbar-inverse bg-inverse">
+  <a class="navbar-brand" href="<?= $requestUrl ?>">Operator 101 Blog</a>
+  <a class="navbar-brand" href="<?= $requestUrl ?>/posts">Articles</a>
+  <?php
+    if (isset($user))
+    {
+      if ($user['rights'] == 'administrator')
+      {
+        echo("<a class='navbar-brand' href='$requestUrl/dashboard'>Dashboard</a>");
+      }
+    }
+   ?>
+
+  <a class="navbar-brand">
+      <?php
+        if(isset($user))
+        {
+          include('navConnected.phtml');
+        }
+        else
+        {
+          include('navConnect.phtml');
+        }
+
+      ?>
+</nav>

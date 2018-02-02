@@ -1,0 +1,12 @@
+<li class="nav-item navbar-brand dropdown">
+  <a class="nav-link navbar-brand dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  Se connecter</a>
+  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+    <form action="<?=$requestUrl ?>/profil/signin" method="post" class="dropdown-item connectForm">
+      <input required type="mail" name="mail" placeholder="mail" class="dropdown-item"/>
+      <input required type="password" name="password" placeholder="password" class="dropdown-item" />
+    <button class="dropdown-item">Valider</button>
+    </form>
+    <a class="nav-link dropdown-item" href="<?= $requestUrl ?>/profil/signup">S'inscrire</a>
+  </div>
+</li>

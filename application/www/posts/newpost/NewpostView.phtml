@@ -1,0 +1,91 @@
+<!-- Include Editor style. -->
+
+  <head>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.3/css/froala_editor.min.css' rel='stylesheet' type='text/css' />
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.3/css/froala_style.min.css' rel='stylesheet' type='text/css' />
+
+    <!-- Include JS file. -->
+    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.3/js/froala_editor.min.js'></script>
+
+    <!-- Include external CSS. -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
+
+    <!-- Include Editor style. -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.3/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.3/css/froala_style.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.3/css/plugins/special_characters.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
+
+    <!-- Include Editor JS files. -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.3/js/plugins/file.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.3/js/froala_editor.pkgd.min.js"></script>
+
+  </head>
+
+  <body>
+    <!-- Create a tag that we will use as the editable area. -->
+    <!-- Include external JS libs. -->
+
+    <!-- Initialize the editor. -->
+<form class="form-horizontal" action="<?= $requestUrl ?>/posts/newpost/save" method="POST" enctype="multipart/form-data">
+
+    <div class="form-group">
+      <label for="inputTitle" class="col-sm-4 control-label">Titre</label>
+        <div class="col-sm-10">
+          <input required type="text" name="postTitle" class="form-control" id="inputTitle" placeholder="Titre de l'article">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label required for="inputResume" class="col-sm-4 control-label">Résumé de l'article</label>
+      <div class="col-sm-10">
+        <textarea required class="form-control" name="postResume" placeholder="Résumé de l'article" maxlength="500" id="inputResume"></textarea>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputThumbnail" class="col-sm-4 control-label">Vignette de l'article</label>
+      <div class="col-sm-10">
+        <input required type="file" name="postThumbnail" class="form-control" id="inputThumbnail" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="Inputcategories" class="col-sm-4 control-label">Catégories</label>
+      <div class="col-sm-10">
+        <select required name="categories" class="form-control" id="inputCategories">
+          <?php
+          foreach($categories as $value)
+          {
+            foreach($value as $innerValue)
+            {
+              echo("<option>
+              $innerValue
+              </option>");
+            }
+          }
+          ?>
+        </select>
+      </div>
+    </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <textarea required name="postContent" id="myEditor" placeholder="Tapez ici le contenu de votre article"></textarea>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-resto101">Soumettre</button>
+    </div>
+  </div>
+
+</form>
+
+<script src="<?= $wwwUrl ?>/js/froala/froala.js"></script>
+  </body>
+</html>

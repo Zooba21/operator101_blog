@@ -1,0 +1,14 @@
+<div class="comment-item">
+  <p>
+    Commenté par <?= $value['firstName']." ".$value['lastName']; ?> le <?= $value['commentDate']; ?>
+  </p>
+  <p>
+    <?= $value['commentContent']; ?>
+  </p>
+  <form action="<?= $requestUrl ?>/posts/reportcomments" method="POST">
+      <input name="idComment" type="hidden" value="<?= $value['id']?>">
+      <input name="target" type="hidden" value="posts" />
+      <input name="mode" type="hidden" value="report" />
+      <button type="submit" class="btn btn-link"><i class="fa fa-exclamation-circle" aria-hidden="true"></i></button>
+  </form>
+</div>

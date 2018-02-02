@@ -1,0 +1,165 @@
+html
+{
+  font-size:62.5%;
+}
+
+/*Navbar Header*/
+
+.navbar-header
+{
+  padding:10px 50px 10px 50px;
+  display:flex;
+  flex-direction:row;
+  justify-content:space-between;
+}
+.navbar-header a
+{
+  font-size:1.5rem;
+}
+
+/*Formulaire de connexion*/
+
+.connectForm .dropdown-item
+{
+  margin-bottom:10px;
+  display:flex;
+  flex-direction:column;
+}
+
+.dropdown-menu form input
+{
+  background-color:grey;
+}
+
+/* Page d'accueil */
+
+main
+{
+  margin:0px;
+}
+
+.home-page-header
+{
+  background-image:url('../images/ressources/home_background.jpg');
+  background-size:cover;
+  background-repeat:no-repeat;
+
+  text-align:center;
+  color:white;
+}
+
+.home-page-header__rgba
+{
+  background-color:rgba(0,0,0,0.5);
+  padding:50px;
+  font-size:1.5rem;
+}
+
+.home-page-header__rgba h1
+{
+  font-size:3rem;
+  margin-bottom:25px;
+}
+
+.home-page-header__rgba .fa
+{
+  display: inline-block;
+  border-radius: 60px;
+  box-shadow: 0px 0px 2px #888;
+  padding: 0.5em 0.6em;
+  font-size:4rem;
+  background-color:rgba(255,255,255,0.1);
+  margin-bottom:25px;
+}
+
+/*Profile Page*/
+
+.profile-user-img
+{
+  border-radius:100%;
+  max-width:35%;
+  display:block;
+  margin:auto;
+}
+
+.nav-tabs-custom .nav-tabs
+{
+  display:flex;
+  justify-content: space-around;
+}
+
+.nav-tabs
+{
+  margin-bottom:25px;
+}
+
+.nav-tabs a
+{
+  text-decoration:none;
+  color:inherit;
+}
+
+.tab-content .btn
+{
+  display:block;
+  margin:auto;
+}
+
+/* Article page */
+
+.search-post-form
+{
+  margin-top:10px;
+}
+
+/* Thumbnails */
+.post-list
+{
+  display:flex;
+  flex-direction:row;
+  padding:10px;
+}
+
+.post-item
+{
+  margin:25px;
+  padding:10px;
+  border:solid black 1px;
+  border-radius:25px;
+}
+
+.post-detail
+{
+  text-align:center;
+  margin:auto;
+  margin-bottom:10px;
+}
+
+.comments::before
+{
+  display:block;
+  width:70%;
+  height:1px;
+  background-color:black;
+  content:"";
+  margin:auto;
+}
+/* Commentaires */
+
+.comments
+{
+margin-top:10px;
+text-align:center;
+margin:auto;
+}
+
+.comments *
+{
+  flex-basis:1;
+}
+
+.post-comments-form
+{
+  margin-top:10px;
+  margin-bottom:10px;
+}

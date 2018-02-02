@@ -1,0 +1,17 @@
+<div class="post-item">
+  <a href="?id=<?= $value['id'] ?>">
+    <img src="<?= $wwwUrl.$value['postThumbnail']   ?>"/>
+    <h2><?= $value['postTitle'] ?></h2>
+    <p>
+      <?= $value['postResume'] ?>
+    </p>
+  </a>
+  <p>
+    <a href="?redactorId=<?= $value['redactorId'] ?>">
+    Publié par <?= $value['firstName']." ".$value['lastName'] ?></a>
+   le <?= $value['creationDate'];?>
+    dans <a href="?categoryId=<?= $value['categoryId'] ?>">
+  <?= $value['categoryName']; ?>
+  </a>
+</p>
+</div>

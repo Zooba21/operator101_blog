@@ -1,0 +1,10 @@
+<li class="nav-item navbar-brand dropdown">
+  <a class="nav-link navbar-brand dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <?= $user['firstName']." ".$user['lastName']; ?>
+  </a>
+  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+    <a class="dropdown-item" href="<?= $requestUrl ?>/profil" aria-labelledby="navbarDropdownMenuLink">Profile</a>
+    <a class="dropdown-item" href="<?=$requestUrl ?>/posts/newpost" aria-labelledby="navbarDropdownMenuLink">Publier</a>
+    <a class="dropdown-item" href="<?= $requestUrl ?>/profil/signout">Se déconnecter</a>
+  </div>
+</li>

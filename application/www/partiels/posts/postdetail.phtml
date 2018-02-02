@@ -1,0 +1,48 @@
+<article class="post-detail">
+    <img src="<?= $wwwUrl.$value['postThumbnail'] ?>"/>
+    <h2><?= $value['postTitle'] ?></h2>
+    <p>
+      <?= $value['postResume'] ?>
+    </p>
+    <div class="fr-view">
+      <?= $value['postContent'] ?>
+    </div>
+    <p>
+      Posté par <a href="?redactorId=<?= $value['redactorId']?>"><?=$value['firstName']." ".$value['lastName'] ?></a> dans <a href="?categoryId=<?= $value['categoryId'] ?>"><?= $value['categoryName'] ?></a>
+    </p>
+    <?php
+    if(isset($user))
+    {
+      if ($value['redactorId'] == $user['id'] || $user['rights'] != 'user')
+      {
+        include('postmodif.phtml');
+      }
+    }
+
+     ?>
+</article>
+
+<section class="comments">
+
+<?php
+
+if (isset($user))
+{
+  include('postcomment.phtml');
+}
+else
+{
+  echo("<p>Vous devez être connecté pour pouvoir poster un commentaire</p>");
+}
+
+if (isset($comments))
+{
+  foreach($comments as $value)
+  {
+    include('commentslist.phtml');
+  }
+}
+
+?>
+
+</section>

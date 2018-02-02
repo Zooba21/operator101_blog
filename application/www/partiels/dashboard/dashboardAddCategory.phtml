@@ -1,0 +1,17 @@
+<tr>
+  <td>
+    <p>
+      Ajouter une nouvelle catégorie
+    </p>
+  </td>
+  <td>
+    <form method="POST" action="<?= $requestUrl ?>/dashboard">
+        <input type="text" name="categoryName" />
+        <input type="hidden" name="target" value="<?= $target ?>">
+  </td>
+  <td></td>
+  <td>
+    <input type="submit" value="Ajouter" />
+  </td>
+  </form>
+</tr>
