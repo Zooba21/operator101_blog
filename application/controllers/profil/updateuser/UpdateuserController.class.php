@@ -33,29 +33,37 @@
 
       /*Déclaration des class*/
       $user = new UserModel(new Database);
+      if ($formFields['mode'] == "updateUser")
+      {
+        unset($formFields['mode']);
+        $user->UpdateUser($formFields);
 
+        /*Gestion du $_FILES*/
+        if ($_FILES['avatar']['error']==0)
+        {
+          $inputFile=$_FILES['avatar'];
+          $inputFile['id']=$render['user']['id'];
+          var_dump($inputFile);
+          $user->updateAvatar($inputFile);
+        }
+
+        /*Mise à jour du $_SESSION*/
+
+        $result = $user->updateSession([$_SESSION['user']['id']]);
+        $_SESSION['user']=$result;
+        $render['user']=$result;
+
+        if(empty($_SESSION['user']['avatarUrl']))
+        {
+          $_SESSION['user']['avatarUrl']="images/user/no-photo.png";
+        }
+      }
+      else if ($formFields['mode'] == "updatePassword")
+      {
+        $password = $user->UpdatePassword($formFields);
+      }
       /*Mise à jour du profil utilisateur*/
-      $user->UpdateUser($formFields);
 
-      /*Gestion du $_FILES*/
-      if ($_FILES['avatar']['error']==0)
-      {
-        $inputFile=$_FILES['avatar'];
-        $inputFile['id']=$render['user']['id'];
-        var_dump($inputFile);
-        $user->updateAvatar($inputFile);
-      }
-
-      /*Mise à jour du $_SESSION*/
-
-      $result = $user->updateSession([$_SESSION['user']['id']]);
-      $_SESSION['user']=$result;
-      $render['user']=$result;
-
-      if(empty($_SESSION['user']['avatarUrl']))
-      {
-        $_SESSION['user']['avatarUrl']="images/user/no-photo.png";
-      }
 
 
        /*

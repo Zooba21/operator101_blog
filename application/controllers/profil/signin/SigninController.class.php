@@ -5,7 +5,6 @@ class SigninController
     public function httpGetMethod(Http $http, array $queryFields)
     {
       $render['flashbag'] = new FlashBag;
-
     	return($render);
     }
 
@@ -15,6 +14,7 @@ class SigninController
       $user= new UserModel(new Database);
       $connectForm=[$formFields['mail'],$formFields['password']];
       $user->connectUser($connectForm,$http);
+      return($render);
     	/*
     	 * Méthode appelée en cas de requête HTTP POST
     	 *

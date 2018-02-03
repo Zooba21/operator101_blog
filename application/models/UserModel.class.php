@@ -5,7 +5,7 @@ class UserModel extends AbstractModel
 
   const SQL_SIGNUP = "INSERT INTO `user` (`firstName`, `lastName`, `mail`, `password`) VALUES (?,?,?,?)";
 
-  const SQL_CONNECT = "SELECT `id`,`rights`,`firstName`,`lastName`,`avatarUrl`,`phone`,`mail` FROM `user` WHERE `mail`=? AND `password`=?";
+  const SQL_CONNECT = "SELECT `id`,`rights`,`firstName`,`lastName`,`avatarUrl`,`phone`,`mail`,`password` FROM `user` WHERE `mail`=?";
 
   const SQL_UPDATE =
   "SELECT `phone`, `inscriptionDate`, `mail`, `rights`, `id`, `lastName`, `firstName`, `avatarUrl`
@@ -36,10 +36,10 @@ class UserModel extends AbstractModel
   WHERE `id`=?";
 
   const SQL_VERIF_PASSWORD =
-  "SELECT `password` FROM `password` WHERE `userId`=? AND `password`=?";
+  "SELECT `password` FROM `user` WHERE `id`=?";
 
   const SQL_UPDATE_PASSWORD =
-  "UPDATE `password` SET `password`=? WHERE `userId`=?";
+  "UPDATE `user` SET `password`=? WHERE `id`=?";
 
   const SQL_UPDATE_RIGHTS = "UPDATE `user` SET `rights`=? WHERE `id`=?";
 
@@ -51,17 +51,27 @@ class UserModel extends AbstractModel
  */
   function connectUser(array $queryFields, Http $http)
   {
-    $result = $this->database->queryOne(self::SQL_CONNECT,$queryFields);
+    var_dump($queryFields);
+    $result = $this->database->queryOne(self::SQL_CONNECT,[$queryFields[0]]);
+    var_dump($result);
     if ($result)
     {
-      if ($result['rights'] != 'banned')
+      if (password_verify($queryFields[1],$result['password']) == $result['password'])
       {
-        $session= (new UserSession)->create($result);
-        $http->redirectTo('profil');
+        if ($result['rights'] != 'banned')
+        {
+          $session = (new UserSession)->create($result);
+          $http->redirectTo('profil');
+        }
+        else
+        {
+          $flashbag = (new FlashBag)->add("Vous n'avez pas la persmission de vous connecter actuellement. Veuillez réessayer ultérieurement");
+          $http->redirectTo('');
+        }
       }
       else
       {
-        $flashbag = (new FlashBag)->add("Vous n'avez pas la persmission de vous connecter actuellement. Veuillez réessayer ultérieurement");
+        $flashbag = (new FlashBag)->add("Identifiant ou mot de passe incorrect");
         $http->redirectTo('');
       }
     }
@@ -175,11 +185,24 @@ class UserModel extends AbstractModel
 public function updatePassword(array $queryFields)
 {
 
-  $result = $this->database->queryOne(self::SQL_VERIF_PASSWORD,[$queryFields['id'],$queryFields['oldPassword']]);
-  if ($result['password']==$queryFields['oldPassword'])
+  // Vérification de l'ancien mot de passe
+  $result = $this->database->queryOne(self::SQL_VERIF_PASSWORD,[$_SESSION['user']['id']]);
+  if (isset($result) && (password_verify($queryFields['oldPassword'],$result['password']) == $queryFields['oldPassword']))
   {
-    $result = $this->database->executeSql(self::SQL_UPDATE_PASSWORD,[$queryFields['password'],$queryFields['id']]);
+    if ($queryFields['password']==$queryFields['confirmPassword'])
+    {
+      $result = $this->database->executeSql(self::SQL_UPDATE_PASSWORD,[password_hash($queryFields['password'],PASSWORD_DEFAULT),$_SESSION['user']['id']]);
+    }
+    else
+    {
+      $flashbag = (new FlashBag)->add("Les mots de passes ne correspondent pas");
+    }
   }
+  else
+  {
+    $flashbag = (new FlashBag)->add("L'ancien mot de passe ne correspond pas");
+  }
+
   return $result;
 }
 

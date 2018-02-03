@@ -17,7 +17,7 @@ class SignupController
     if($formFields['password'] == $formFields['passwordControl'])
     {
       $user = new UserModel(new Database);
-      $signupForm=[$formFields['firstName'],$formFields['lastName'],$formFields['mail'],$formFields['password']];
+      $signupForm=[$formFields['firstName'],$formFields['lastName'],$formFields['mail'],password_hash($formFields['password'],PASSWORD_DEFAULT)];
       $result = $user->signUp($signupForm);
       if ($result)
       {
@@ -29,8 +29,6 @@ class SignupController
         $flashbag = (new FlashBag(new Database))->add("Erreur lors de la création du compte, veuillez rééessayer");
         $http->redirectTo('profile/sgnup');
       }
-
-
     }
     else
     {
