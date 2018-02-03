@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  localhost:3306
--- Généré le :  Ven 02 Février 2018 à 15:51
+-- Généré le :  Sam 03 Février 2018 à 17:34
 -- Version du serveur :  5.7.21-0ubuntu0.17.10.1
 -- Version de PHP :  7.1.11-0ubuntu0.17.10.1
 
@@ -60,14 +60,6 @@ CREATE TABLE `comment` (
   `commentDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Contenu de la table `comment`
---
-
-INSERT INTO `comment` (`id`, `userId`, `postId`, `commentContent`, `reported`, `commentDate`) VALUES
-(1, 1, 17, '  Génial !', '0', '2018-01-10 17:09:29'),
-(2, 2, 17, 'Trop bien !', '2', '2018-01-11 18:21:39');
-
 -- --------------------------------------------------------
 
 --
@@ -85,14 +77,6 @@ CREATE TABLE `post` (
   `creationDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modificationDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Contenu de la table `post`
---
-
-INSERT INTO `post` (`id`, `redactorId`, `postTitle`, `postResume`, `postContent`, `postThumbnail`, `categoryId`, `creationDate`, `modificationDate`) VALUES
-(17, 1, 'Op&eacute;rator 101 : qu\'est-ce que c\'est ?', 'Tout sur la philosophie du blog et &agrave; quoi il est destin&eacute; !                                                                                                                                                                ', '<p>Ce blog est destin&eacute; &agrave; &eacute;changer entre d&eacute;veloppeurs ! Vos r&eacute;ussites, vos anecdotes, partager un projet qui vous tient &agrave; coeur o&ugrave; sur lequel vous avez rencontr&eacute; des difficult&eacute;s, bref : tout ce que vous voulez.&nbsp;</p><p>C&#39;est donc un blog d&#39;&eacute;change, alors : &eacute;changez ! <span class=\"fr-emoticon fr-deletable fr-emoticon-img\" style=\"background: url(https://cdnjs.cloudflare.com/ajax/libs/emojione/2.0.1/assets/svg/1f60b.svg);\">&nbsp;</span></p><p>On change la photo pour voir</p>', '/images/posts/thumbnail/17.png', 4, '2018-01-06 12:07:06', '2018-01-06 12:07:06'),
-(18, 1, 'Le second article', 'Cr&eacute;er un blog, c\'est comment ?                ', '<p>Cr&eacute;er un blog, c&#39;est assez amusant ! Il faut penser &agrave; beaucoup de choses ! Vous en saurez plus bient&ocirc;t ;) test</p>', '/images/posts/thumbnail/18.png', 1, '2018-01-06 16:51:13', '2018-01-06 16:51:13');
 
 -- --------------------------------------------------------
 
@@ -118,7 +102,7 @@ CREATE TABLE `user` (
   `lastName` varchar(50) DEFAULT NULL,
   `firstName` varchar(50) DEFAULT NULL,
   `mail` varchar(50) NOT NULL,
-  `password` varchar(50) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
   `avatarUrl` varchar(100) DEFAULT NULL,
   `phone` varchar(10) DEFAULT NULL,
   `inscriptionDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -130,8 +114,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `lastName`, `firstName`, `mail`, `password`, `avatarUrl`, `phone`, `inscriptionDate`, `rights`) VALUES
-(1, 'Masi', 'Albane', 'albane.martinelli@gmail.com', 'tijuana23', '/images/user/1.jpeg', '0695411186', '2018-01-03 12:01:50', 'administrator'),
-(2, 'Benjamin', 'Masi', 'benjamin.masi45@gmail.com', 'taratata26', NULL, '0624845824', '2018-01-11 17:58:14', 'user');
+(5, 'Masi', 'Benjamin', 'administrator@blog101.fr', '$2y$10$c/cSPRfy1aoYRq2fDMwBduTh7ZUY/ZFRkMN6XXe5VfX.mHtFnEJ4O', '/images/user/5.png', '0624845824', '2018-02-03 16:38:41', 'administrator');
 
 --
 -- Index pour les tables exportées
@@ -173,7 +156,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT pour la table `comment`
 --
@@ -188,7 +171,7 @@ ALTER TABLE `post`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- Contraintes pour les tables exportées
 --
