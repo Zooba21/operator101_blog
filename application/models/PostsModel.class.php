@@ -7,7 +7,7 @@
 
     const GET_POST_NUMBER = "SELECT COUNT(`id`) AS postNumber FROM `post` WHERE `redactorId`=?";
 
-    const GET_ALL_POSTS = "SELECT P.`id`, P.`redactorId`, P.`creationDate`, P.`postTitle`, P.`postThumbnail`, P.`postResume`, P.`categoryId`, C.`categoryName`, U.`firstName`, U.`lastName`
+    const GET_ALL_POSTS = "SELECT P.`id`, P.`postContent`, P.`redactorId`, P.`creationDate`, P.`postTitle`, P.`postThumbnail`, P.`postResume`, P.`categoryId`, C.`categoryName`, U.`firstName`, U.`lastName`
                            FROM `post` as P
                            INNER JOIN `user` as U ON U.`id`= P.`redactorId`
                            INNER JOIN `categories` as C ON C.`id`= P.`categoryId` ORDER BY `creationDate`";

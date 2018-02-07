@@ -41,6 +41,7 @@ class PostsController
     {
       $render['comments'] = (new CommentModel(new Database))->getComments([$render['posts'][0]['id']]);
     }
+    // var_dump($render);
     return($render);
   }
 
@@ -53,7 +54,7 @@ class PostsController
     {
       $flashbag = (new Flashbag)->add("Erreur lors de l'ajout du commentaire");
     }
-    $http->redirectTo("posts");
+    $http->redirectTo("posts?id=".$formFields['postId']);
     return($render);
 
     /*

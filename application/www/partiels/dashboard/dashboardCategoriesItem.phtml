@@ -14,7 +14,7 @@
     <?php
       if ($value['postNumber'] == 0)
       {
-          echo("<form action='<?= $requestUrl ?>/dashboard' method='POST'>
+          echo("<form action='$requestUrl/dashboard' method='POST'>
                 <input type='hidden' name='id' value='".$value['id']."'>
                 <input type='hidden' name='mode' value='delete' / >
                 <input type='hidden' name='target' value='".$target."'>
